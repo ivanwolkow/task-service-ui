@@ -1,0 +1,74 @@
+<div class="container">
+
+  <br/>
+
+  <div class="row justify-content-md-center">
+    <h3 class="text-muted">Task managing service</h3>
+  </div>
+
+  <br/><br/>
+
+  <div class="row justify-content-md-center">
+    <div class="col-sm-4">
+      <button [disabled]="createTaskInProgress" (click)="createTask()" type="button" class="btn btn-primary btn-block">
+        <span *ngIf="createTaskInProgress" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+        Create new task
+      </button>
+    </div>
+
+  </div>
+
+  <br/>
+
+  <div class="row justify-content-md-center">
+    <div class="col-sm-4">
+      <table *ngIf="createdTaskIds.length > 0" class="table">
+        <tbody>
+        <tr *ngFor="let createdTaskId of createdTaskIds">
+          <td class="d-flex justify-content-center">{{createdTaskId}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="row justify-content-md-center">
+    <div class="col-sm-6">
+      <div class="input-group row">
+        <input type="text" class="form-control" placeholder="Enter task id here" aria-label="task id"
+               aria-describedby="button-addon2" #taskId>
+        <div class="input-group-append">
+          <button [disabled]="loadTaskInProgress" (click)="loadTaskById(taskId.value)" class="btn btn-outline-secondary"
+                  type="button" id="button-addon2">
+            <span *ngIf="loadTaskInProgress" class="spinner-border spinner-border-sm" role="status"
+                  aria-hidden="true"></span>
+            Fetch task status
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <br/>
+
+  <div class="row justify-content-md-center">
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <div class="row justify-content-md-center">
+    <div *ngIf="loadedTask" class="alert alert-success" role="alert">
+      The task <b>{{loadedTask.id}}</b> is <b>{{loadedTask.status }}</b>, last updated at
+      <b>{{loadedTask.timestamp}}</b>
+    </div>
+  </div>
+
+</div>
+
+
+
